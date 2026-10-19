@@ -1,4 +1,4 @@
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import type * as TypeScript from "typescript";
@@ -107,12 +107,32 @@ const getProjectFiles = (
   return files;
 };
 
+// When the file lists in projectFilesCache were last read.
+let projectFilesReadAt = Date.now();
+
+const changedSinceFilesRead = (filePath: string): boolean => {
+  try {
+    return statSync(filePath).ctimeMs >= projectFilesReadAt;
+  } catch {
+    return false;
+  }
+};
+
 const isInProject = (filePath: string): boolean => {
   const configPath = findNearestConfig(dirname(filePath));
-  return (
-    configPath !== undefined &&
-    getProjectFiles(configPath).has(resolve(filePath))
-  );
+  if (configPath === undefined) return false;
+
+  const path = resolve(filePath);
+  if (getProjectFiles(configPath).has(path)) return true;
+
+  // A long-lived ESLint process (an editor's ESLint server) would otherwise
+  // keep the file list from startup and miss files created since. Re-read
+  // only for files changed after the last read, so files that are genuinely
+  // outside the project don't re-parse every tsconfig on each lint.
+  if (!changedSinceFilesRead(path)) return false;
+  projectFilesCache.clear();
+  projectFilesReadAt = Date.now();
+  return getProjectFiles(configPath).has(path);
 };
 
 /** The tsconfig typescript-eslint uses for files outside every project. */
