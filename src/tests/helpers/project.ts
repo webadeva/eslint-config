@@ -95,16 +95,31 @@ export const createProject = ({
   return root;
 };
 
+/**
+ * Lints `files`, then writes `created` and lints those in the same ESLint
+ * instance, like an editor's long-lived ESLint server seeing a new file.
+ */
 export const lint = async (
   root: string,
   entry: string,
   files: string[],
+  created: Record<string, string> = {},
 ): Promise<Record<string, FileResult>> => {
   const script = `
+    import { mkdirSync, writeFileSync } from "node:fs";
+    import { dirname } from "node:path";
     import { ESLint } from ${JSON.stringify(ESLINT_URL)};
     const { default: config } = await import(${JSON.stringify(pathToFileURL(join(DIST, entry)).href)});
     const eslint = new ESLint({ overrideConfigFile: true, overrideConfig: config });
     const results = await eslint.lintFiles(${JSON.stringify(files)});
+    const created = ${JSON.stringify(created)};
+    for (const [path, content] of Object.entries(created)) {
+      mkdirSync(dirname(path), { recursive: true });
+      writeFileSync(path, content);
+    }
+    if (Object.keys(created).length > 0) {
+      results.push(...(await eslint.lintFiles(Object.keys(created))));
+    }
     const output = {};
     for (const result of results) {
       output[result.filePath.slice(process.cwd().length + 1)] = {
