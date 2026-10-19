@@ -1,5 +1,9 @@
 # @webadeva/eslint-config
 
+[![npm version](https://img.shields.io/npm/v/@webadeva/eslint-config)](https://www.npmjs.com/package/@webadeva/eslint-config)
+[![Release](https://github.com/webadeva/eslint-config/actions/workflows/release.yml/badge.svg)](https://github.com/webadeva/eslint-config/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/npm/l/@webadeva/eslint-config)](LICENSE)
+
 Shared ESLint flat configs for TypeScript projects, with type-aware rules, Prettier, and presets for React, Next.js, and Storybook.
 
 ## Requirements
