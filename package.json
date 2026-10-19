@@ -1,0 +1,131 @@
+{
+  "name": "@webadeva/eslint-config",
+  "version": "0.1.0",
+  "description": "Shared ESLint flat configs for TypeScript projects: type-aware rules, Prettier, and presets for React, Next.js, and Storybook.",
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "eslint-config",
+    "eslint-flat-config",
+    "flat-config",
+    "typescript",
+    "typescript-eslint",
+    "prettier",
+    "react",
+    "nextjs",
+    "storybook",
+    "lint"
+  ],
+  "homepage": "https://github.com/webadeva/eslint-config#readme",
+  "bugs": {
+    "url": "https://github.com/webadeva/eslint-config/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webadeva/eslint-config.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Gobind Singh",
+    "email": "thesinghgobind@gmail.com",
+    "url": "https://www.thegobindsingh.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./next": {
+      "import": "./dist/next.mjs"
+    },
+    "./react": {
+      "import": "./dist/react.mjs"
+    },
+    "./storybook": {
+      "import": "./dist/storybook.mjs"
+    },
+    "./package.json": "./package.json",
+    "./base": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./tsconfig.default.json": "./tsconfig.default.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist",
+    "tsconfig.default.json"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test \"src/tests/**/*.test.ts\"",
+    "check": "pnpm typecheck && pnpm lint && pnpm build && pnpm test",
+    "prepare": "husky",
+    "prepublishOnly": "pnpm check"
+  },
+  "peerDependencies": {
+    "eslint": ">=10.13.0",
+    "prettier": ">=3.0.0",
+    "typescript": ">=5.0.0 <7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": false
+    },
+    "prettier": {
+      "optional": false
+    },
+    "typescript": {
+      "optional": false
+    }
+  },
+  "dependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
+    "@eslint-react/eslint-plugin": "^5.28.2",
+    "@eslint/js": "^10.0.1",
+    "@next/eslint-plugin-next": "^16.4.2",
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
+    "@typescript-eslint/parser": "^8.71.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prefer-arrow-functions": "^3.10.2",
+    "eslint-plugin-prettier": "^5.5.7",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "eslint-plugin-storybook": "^10.6.2",
+    "globals": "^17.13.0",
+    "typescript-eslint": "^8.71.2"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/core": "^0.18.5",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@tsconfig/strictest": "^2.0.8",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "eslint": "^10.13.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.7.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "publint": "^0.3.25",
+    "tsdown": "^0.23.1",
+    "typescript": "6.0.3"
+  },
+  "packageManager": "pnpm@12.14.0"
+}
