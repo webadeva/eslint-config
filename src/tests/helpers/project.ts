@@ -21,7 +21,7 @@ export const execFileAsync: typeof execFile.__promisify__ = promisify(execFile);
 export const DIST: string = fileURLToPath(
   new URL("../../../dist/", import.meta.url),
 );
-const ESLINT_URL = pathToFileURL(require.resolve("eslint")).href;
+export const ESLINT_URL: string = pathToFileURL(require.resolve("eslint")).href;
 const TYPESCRIPT_DIR = realpathSync(
   dirname(require.resolve("typescript/package.json")),
 );

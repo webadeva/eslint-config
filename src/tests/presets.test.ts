@@ -87,6 +87,26 @@ describe("file length rules", () => {
   }
 });
 
+describe("accessibility rules", () => {
+  for (const subpath of ESM_ONLY_PRESETS) {
+    it(`reports JSX a11y issues with ${PKG}${subpath}`, async () => {
+      const eslint = new ESLint({
+        overrideConfigFile: true,
+        overrideConfig: await importPreset(subpath),
+      });
+      const [result] = await eslint.lintText(
+        'export const Logo = () => {\n  return <img src="logo.png" />;\n};\n',
+        { filePath: FIXTURE.replace(/\.ts$/, ".tsx") },
+      );
+      assert.ok(
+        result?.messages.some((message) => {
+          return message.ruleId === "jsx-a11y-x/alt-text";
+        }),
+      );
+    });
+  }
+});
+
 describe("combining presets", () => {
   it("lints with the base and React presets spread together", async () => {
     const eslint = new ESLint({

@@ -26,6 +26,8 @@ src/
 
 - `presets.test.ts`: every entry imports and lints, CJS works for the base preset, and the custom rules are turned on.
 - `typescript-projects.test.ts` and `react-projects.test.ts`: lint temporary projects with different TypeScript setups, outside the repo, each in its own process.
+- `eslint-compat.test.ts`: turns on every rule of every bundled plugin, one at a time, and fails if any of them crashes on the installed ESLint version.
+- `unused-imports.test.ts`: checks that `eslint --fix` removes unused imports when the project's Prettier config loads `prettier-plugin-organize-imports`.
 - `max-lines.test.ts`: tests the file-length rules with ESLint's `RuleTester`.
 - `package.test.ts`: packs the tarball and checks it with [arethetypeswrong](https://arethetypeswrong.github.io/). Only the ESM-only presets may lack a `require` resolution.
 

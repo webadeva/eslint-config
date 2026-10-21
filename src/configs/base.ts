@@ -1,7 +1,6 @@
 import eslintComments from "@eslint-community/eslint-plugin-eslint-comments";
 import pluginJs from "@eslint/js";
 import type { Linter } from "eslint";
-import importPlugin from "eslint-plugin-import";
 import preferArrowFunctions from "eslint-plugin-prefer-arrow-functions";
 import prettier from "eslint-plugin-prettier";
 import globals from "globals";
@@ -61,7 +60,6 @@ export const baseConfigs: Linter.Config[] = [
       "prefer-arrow-functions": preferArrowFunctions,
       "@typescript-eslint": tseslint.plugin,
       "eslint-comments": eslintComments,
-      import: importPlugin,
     },
     rules: {
       ...pluginJs.configs.recommended.rules,

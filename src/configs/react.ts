@@ -1,4 +1,5 @@
 import type { Linter } from "eslint";
+import pluginJsxA11y from "eslint-plugin-jsx-a11y-x";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import pluginReactRefresh from "eslint-plugin-react-refresh";
 import { detectReactVersion } from "../utils/detect-react-version.ts";
@@ -13,6 +14,7 @@ export const reactConfigs: Linter.Config[] = [
   eslintReact.configs["recommended-typescript"],
   pluginReactHooks.configs.flat["recommended-latest"],
   pluginReactRefresh.configs.recommended,
+  pluginJsxA11y.configs.recommended,
   {
     settings: {
       react: {

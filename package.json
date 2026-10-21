@@ -12,6 +12,7 @@
     "typescript-eslint",
     "prettier",
     "react",
+    "a11y",
     "nextjs",
     "storybook",
     "lint"
@@ -101,8 +102,7 @@
     "@typescript-eslint/eslint-plugin": "^8.71.2",
     "@typescript-eslint/parser": "^8.71.2",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-jsx-a11y-x": "^0.2.0",
     "eslint-plugin-prefer-arrow-functions": "^3.10.2",
     "eslint-plugin-prettier": "^5.5.7",
     "eslint-plugin-react-hooks": "^7.1.1",
